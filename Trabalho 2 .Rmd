@@ -1,0 +1,176 @@
+---
+title: "Como fazer um pacote no R"
+author: "André, Jéferson, João Pedro e Maísa"
+date: "13/10/2020"
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+      smooth_scroll: true
+    theme: yeti
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("UFMG-logo.png"), 
+               alt = 'logo', 
+               style = 'position:absolute; top:0; right:0;  padding:10px; width: 150px'
+               )
+```
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+if (!require("DT")){ install.packages('DT');require("DT")}
+if (!require("knitr")){ install.packages('knitr');require("knitr")}
+if (!require("tidyverse")){install.packages('tidyverse');require("tidyverse")}
+if (!require("devtools")){install.packages('devtools');require("devtools")}
+```
+<div style="text-align:justify;">
+
+## Introdução
+
+### A escolha do tema
+
+O grupo escolheu o tema *'Como fazer um pacote no R'* por acha-lo um tema relevante para o conteúdo da disciplina, onde pode-se aplicar os vários conhecimentos adquiridos até aqui, como por exemplo o uso frequente de funções criadas. Quando se realiza um mesmo processo varias vezes, criar uma função que ajude nessa tarefa é muito útil. E para que fique mais simples acessar essa função, pode-se criar um pacote para guarda-lá. Além disso, esse pacote pode ser publicado para que as suas funções possam ser usadas e aprimoradas por outros usuários.
+
+Neste trabalho vamos mostrar como transformar suas funções em um pacote e publicá-lo.
+
+### O Pacote qqr
+
+Como exemplo de como criar um pacote, vamos apresentar todo o passo a passo de criação do pacote qqr. Este pacote tem como funcionalidade a leitura da tabela oficial do Brasileirão 2020 atualizada além de ter disponível a tabela do campeonato referente a 2014.
+
+Destaca-se que existem várias formas de criar um pacote. Iremos criar usando o pacote *devtools*, que é uma maneira mais simples e que possui funções para criar, conferir o pacote, testar e documentar as funções, tudo dentro de uma sessão do R.
+
+## Passo a passo da criação de um pacote
+
+### Criando o ambiente do pacote
+
+O primeiro passa na criação de um pacote é criar um ambiente. Isso pode ser feito da seguinte forma:
+
+  1. Primeiro clique em R Project > New Project.  
+
+<div align="center">
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("imagem1.png"),
+               alt = 'New Project')
+```
+</div>    
+<br>  
+
+  2. Então selecione a opção New Directory > R Package.
+  
+<div align="center">
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("imagem2.png"),
+               alt = 'R Package')
+```
+</div>
+<br>  
+  
+  3. Por fim, preencha o nome que você quer dar para o seu pacote e selecione o diretório onde ficará todos os arquivos.
+
+<div align="center">
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("imagem3.png"),
+               alt = 'New Project')
+```
+</div>
+<br> 
+
+Outra maneira de criar o ambiente é pelo devtools, da seguinte forma:  
+
+         create('qqr')
+   
+Após a criação do ambiente, o R criará automaticamente os arquivos da imagem a seguir, além de um script com um exemplo de uma função 'hello word'.
+
+<div align="center">
+```{r, echo=FALSE}
+htmltools::img(src = knitr::image_uri("imagem4.png"),
+               alt = 'Arquivos')
+```
+</div>
+<br> 
+
+### Estrutura de um pacote
+
+Depois de seguir todos os passos anteriores, finalmente temos a estrutura do nosso pacote, que funciona assim:
+
+- Temos uma pasta R (diretório 'R/). Nela ficarão armazenadas todas as funções do pacote, inclusive a 'hello word' que foi criada automaticamente. Também é armazenado as documentações dos scripts e dos banco de dados, caso o pacote possua. Os arquivos nesta pasta tem a extensão .R (ex: hello.R).
+
+- Uma pasta (diretório 'man/') chamada man onde ficará todos os arquivos de documentação do das funções que estão no diretório acima. Os arquivos nesta pasta têm a extensão .Rd (ex: hello.Rd) e são gerados automaticamentes, portanto não devem ser editados.
+
+- Um arquivo de texto chamado DESCRIPTION com as informações sobre o pacote, como autor, pacotes que são necessários para o funcionamento do seu pacote, versão do R mínima, entre outros.
+
+- Um arquivo de texto chamado NAMESPACE que informa quais funções do pacote serão exportadas (disponíveis para o usuário) e quais serão importadas de outros pacotes dos quais o seu depende.
+
+
+Existem também outros arquivos que não são criados automáticamente e nem obrigatórios para o pacote, mas podem estar presentes. São eles:
+
+- Uma pasta chamada tests (diretório 'tests/') contendo scripts com testes, rodados durante a criação do pacote para encontrar algum resultado não esperado. 
+
+- Uma pasta chamada vignettes (diretório 'vignettes/') contendo uma ou mais vignettes que são um pequeno tutorial das funções do pacote.
+
+- Uma pasta chamada data (diretório '/data') contendo arquivos de dados que podem ser usados como exemplos na utilização das funções do pacote. É preferivel que estes arquivos estejam em formato binario e comprimido (ex: .rda).
+
+
+### Criando as funções
+
+
+### Adicionando uma base de dados no pacote
+
+Adicionar bases de dados ao pacote, seja para usar como exemplo ou para disponibiliza-lás para os usuários, como no caso deste pacote, é bem simples utilizando o devtools.
+Primeiro você deve selecionar sua base e salva-la como .rda na pasta data.
+Para salvar os dados como .rda basta usar o seguinte comando:
+```{r}
+dados = data.frame(a= c(1,2),
+                   b= c(3, 4))
+```
+
+
+```{r, echo=TRUE}
+saveRDS(object = dados, file = 'dados.rda')
+```
+
+É importante ressaltar que o nome do ojeto deve ser o mesmo do nome salvo.
+
+Então basta colocar este arquivo na pasta data e usar ........
+
+
+### Documentando as funções e as bases de dados
+
+### Document
+
+
+### Vignettes
+
+
+### Criando o help do pacote
+
+
+### Preparando o pacote para instalação
+
+
+### NameSpace
+
+
+### Instalando o pacote localmente
+
+### Publicando o pacote
+
+#### No GitHub:
+
+#### No CRAN:
+
+
+
+
+## Referências
+
+1. http://cursos.leg.ufpr.br/prr/capPacR.html#
+
+</div> 
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
