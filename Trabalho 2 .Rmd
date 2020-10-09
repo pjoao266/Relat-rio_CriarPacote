@@ -101,7 +101,7 @@ htmltools::img(src = knitr::image_uri("imagem4.png"),
 
 Depois de seguir todos os passos anteriores, finalmente temos a estrutura do nosso pacote, que funciona assim:
 
-- Temos uma pasta R (diretório 'R/). Nela ficarão armazenadas todas as funções do pacote, inclusive a 'hello word' que foi criada automaticamente. Também é armazenado as documentações dos scripts e dos banco de dados, caso o pacote possua. Os arquivos nesta pasta tem a extensão .R (ex: hello.R).
+- Temos uma pasta R (diretório 'R/'). Nela ficarão armazenadas todas as funções do pacote, inclusive a 'hello word' que foi criada automaticamente. Também é armazenado as documentações dos scripts e dos banco de dados, caso o pacote possua. Os arquivos nesta pasta tem a extensão .R (ex: hello.R).
 
 - Uma pasta (diretório 'man/') chamada man onde ficará todos os arquivos de documentação do das funções que estão no diretório acima. Os arquivos nesta pasta têm a extensão .Rd (ex: hello.Rd) e são gerados automaticamentes, portanto não devem ser editados.
 
@@ -121,6 +121,30 @@ Existem também outros arquivos que não são criados automáticamente e nem obr
 
 ### Criando as funções
 
+O procedimento para que você crie funções para o pacote não difere muito do procedimento normal de definição de funções. É necessário definir o nome da função e os argumentos que ela irá receber, no escopo ficam os procedimentos que você quer que a função realize. Abaixo, se tem o exemplo da definição da função _currentData_ do pacote qqr.
+
+```{r}
+htmltools::img(src = knitr::image_uri("imagem10.png"),
+               alt = 'currentData function')
+```
+
+As funções devem ficar em arquivos .R no diretório 'R/', para manter uma boa prática e ter os arquivos mais organizados é recomendado que a função e o arquivo .R tenha o mesmo nome, por exemplo, a função _currentData_ está sendo criada no arquivo currentData.R que está dentro do diretório 'R/'. Além disso, nesse arquivo R é importante que o desenvolvedor documente a função, os elementos da documentação e como documentar será discutido em tópicos futuros do relatório.
+
+
+Outra coisa que pode ser feita é definir nova classe para uma variável e adaptar os metódos comuns para esta nova classe criada. O primeiro passo é definir uma classe para alguma variável que será retornada, na função _currentData_ a variável tabela passou a ter classe "tabelaBR", após isso é necessário adaptar os métodos. No arquivo print.tabelaBR.R criamos a função _print.tabelaBR_, note que é necessário que antes do '.' esteja o nome de um função comumente utilizada e após o '.' esteja a classe que você queira adaptar o método. No escopo da função você programa o procedimento para essa classe. Para fixar, se você quiser adaptar a função summary para a classe 'DestUFMG' é necessário criar a função _summary.DestUFMG_. A seguir é mostrado o código da função _print.tabelaBR_ e sua documentação. 
+
+
+```{r}
+htmltools::img(src = knitr::image_uri("imagem11.png"),
+               alt = 'print.tabelaBR function')
+```
+
+Se o pacote não está pronto ainda, mas você quer testar as funções já criadas é possível utilizar a função load_all que carrega as funções temporiamente, após usá-las é recomendado utilizar a função unload para apagar as funções do ambiente.
+
+```{r,eval=FALSE,echo=T}
+load_all() # carrega as funções
+unload()   # descarrega as funções
+```
 
 ### Adicionando uma base de dados no pacote
 

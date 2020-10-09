@@ -13,6 +13,7 @@ OK
 criar as funções -> J
 	S3Methods
 	carregar temporariamente as funções (load_all)
+OK
 ------------------------------------------------------
 definir os bancos de dados -> M
 -----------------------------------------------
