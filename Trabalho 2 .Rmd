@@ -281,7 +281,11 @@ htmltools::img(src = knitr::image_uri("imagem9.png"),
 ## Referências
 
 1. http://cursos.leg.ufpr.br/prr/capPacR.html#
-
+2. https://cran.r-project.org/web/packages/devtools/index.html
+3. https://cran.r-project.org/doc/contrib/Leisch-CreatingPackages.pdf
+4. https://developer.r-project.org/Rds.html
+5. https://cran.r-project.org/doc/manuals/r-release/R-exts.html#Package-Dependencies
+ 
 </div> 
 
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
