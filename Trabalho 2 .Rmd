@@ -27,6 +27,8 @@ if (!require("DT")){ install.packages('DT');require("DT")}
 if (!require("knitr")){ install.packages('knitr');require("knitr")}
 if (!require("tidyverse")){install.packages('tidyverse');require("tidyverse")}
 if (!require("devtools")){install.packages('devtools');require("devtools")}
+if (!require("qqr")){devtools::install_github("https://github.com/jeff25601/qqr", build_vignettes =TRUE,force=T);require("qqr")}
+
 ```
 <div style="text-align:justify;">
 
@@ -314,7 +316,7 @@ O Git é uma ferramenta com muitos recursos e o que foi mostrado é apenas uma p
 
 ## Conclusão
 
-Depois de realizar todas as etapas da criação do pacote, pode-se observar na imagem abaixo o repositório oficial do pacote qqr no Github:
+Depois de realizar todas as etapas da criação do pacote, pode-se observar na imagem abaixo o repositório do pacote qqr no Github:
 
 <div align="center">
 ```{r}
@@ -322,8 +324,37 @@ htmltools::img(src = knitr::image_uri("imagem9.png"),
                alt = 'GitHub')
 ```
 </div>
-<br> 
 
+
+# Funcionalidades do pacote qqr
+
+A primeira coisa a ser feita é carregar o pacote através da função library. Após isso poderá se mostrar as funcionalidaddes do pacote, como foi ensinado criou-se um banco de dados para o pacote, o código a seguir mostra como acessar o banco de dados que retorna a tabela do Campeonato Brasileiro de 2014.
+
+```{r,echo=T}
+##caregando o pacote
+library(qqr)
+data("BRSoccer2014",package = 'qqr')
+
+BRSoccer2014
+```
+
+Usando a função _currentData_ é retornada a tabela atual do Campeonato Brasileiro de 2020.
+```{r,echo=T}
+currentData()
+```
+
+Usando a função _previousData_ é retornada uma tabela do Campeonato Brasileiro, os anos disponíveis para acesso são os anos de 2015 até 2019.
+
+```{r,echo=T}
+previousData(2017)
+```
+
+Para acessar o help do pacote basta rodar o seguinte código.
+```{r,eval=FALSE,echo=T}
+?qqr
+```
+
+<br> 
 
 ## Referências
 

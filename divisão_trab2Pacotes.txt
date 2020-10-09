@@ -62,8 +62,8 @@ Falar sobre compilação e mostrar a função (compile_dll) -> J
 Conclusão / Resultados -> M
     - Dificuldades no processo
     - Mostrar tanto a pagina do CRAN
-- quanto no GitHub OK
-    - Mostrar as funções e utilidades
+    - quanto no GitHub OK
+    - Mostrar as funções e utilidades ok
     - Mostrar o numero de downloads
 
 
