@@ -18,6 +18,7 @@ definir os bancos de dados -> M
 -----------------------------------------------
 documentar as funções e bancos de dados -> J
 	explicar cada item
+-----------------------------------------------
 editar o arquivo document -> J
 	explicar cada item
 	titulo: padrão (só a primeira maiscula)
@@ -27,18 +28,22 @@ editar o arquivo document -> J
 	maintener e autores: pode-se varios autores, mas apenas 1 maintener
 	VignetteBuilder
 	explicar as diferenças entre import, depends, suggests
+--------------------------------------------------------------
 vignettes -> J
 	criar
 	build
+--------------------------------------------------------------
 documentar (criar os helps, preparar o pacote pra instalação) -> J
+------------------------
 explicar namespace -> J
+------------------------
 instalar localmente -> J
 (falar pro andre mostrar o pacote na apresentação)
 -------------------------------------------------------------------------
 falar das formas para disponibilizar o pacote para outros usuarios -> M
 	github
 	CRAN
-
+------------------------------------------------------------------
 No github: ->M
 	subir arquivos pro github
 	instalar pela função install_github
@@ -48,13 +53,17 @@ No CRAN: -> J
 	outras formas de checar o pacote
 	compilar o pacote (gerar o arquivo tar.gz)
 	procedimento de mandar para o CRAN
-
-Especificar que usamos o devtools, e q existem outras formas -> M (passei pra introdução)
-
+------------------------------------------------------------------------------------------
+Especificar que usamos o devtools, e q existem outras formas -> M (passei pra introdução) OK
+--------------------------------------------------------------------------------------------
 Falar sobre compilação e mostrar a função (compile_dll) -> J
 -------------------------------------------------------------
 Conclusão / Resultados -> M
     - Dificuldades no processo
-    - Mostrar tanto a pagina do CRAN quanto no GitHub
+    - Mostrar tanto a pagina do CRAN
+- quanto no GitHub OK
     - Mostrar as funções e utilidades
     - Mostrar o numero de downloads
+
+
+-------------------------------------------------------------

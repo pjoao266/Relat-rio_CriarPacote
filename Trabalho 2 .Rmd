@@ -16,13 +16,13 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-```{r, echo=FALSE}
+```{r}
 htmltools::img(src = knitr::image_uri("UFMG-logo.png"), 
                alt = 'logo', 
                style = 'position:absolute; top:0; right:0;  padding:10px; width: 150px'
                )
 ```
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 if (!require("DT")){ install.packages('DT');require("DT")}
 if (!require("knitr")){ install.packages('knitr');require("knitr")}
 if (!require("tidyverse")){install.packages('tidyverse');require("tidyverse")}
@@ -53,7 +53,7 @@ O primeiro passa na criação de um pacote é criar um ambiente. Isso pode ser f
   1. Primeiro clique em R Project > New Project.  
 
 <div align="center">
-```{r, echo=FALSE}
+```{r}
 htmltools::img(src = knitr::image_uri("imagem1.png"),
                alt = 'New Project')
 ```
@@ -63,7 +63,7 @@ htmltools::img(src = knitr::image_uri("imagem1.png"),
   2. Então selecione a opção New Directory > R Package.
   
 <div align="center">
-```{r, echo=FALSE}
+```{r}
 htmltools::img(src = knitr::image_uri("imagem2.png"),
                alt = 'R Package')
 ```
@@ -73,7 +73,7 @@ htmltools::img(src = knitr::image_uri("imagem2.png"),
   3. Por fim, preencha o nome que você quer dar para o seu pacote e selecione o diretório onde ficará todos os arquivos.
 
 <div align="center">
-```{r, echo=FALSE}
+```{r}
 htmltools::img(src = knitr::image_uri("imagem3.png"),
                alt = 'New Project')
 ```
@@ -81,13 +81,16 @@ htmltools::img(src = knitr::image_uri("imagem3.png"),
 <br> 
 
 Outra maneira de criar o ambiente é pelo devtools, da seguinte forma:  
-
-         create('qqr')
    
+```{r, eval=FALSE, echo=TRUE}
+ create('qqr')
+```
+   
+ 
 Após a criação do ambiente, o R criará automaticamente os arquivos da imagem a seguir, além de um script com um exemplo de uma função 'hello word'.
 
 <div align="center">
-```{r, echo=FALSE}
+```{r}
 htmltools::img(src = knitr::image_uri("imagem4.png"),
                alt = 'Arquivos')
 ```
@@ -121,22 +124,23 @@ Existem também outros arquivos que não são criados automáticamente e nem obr
 
 ### Adicionando uma base de dados no pacote
 
-Adicionar bases de dados ao pacote, seja para usar como exemplo ou para disponibiliza-lás para os usuários, como no caso deste pacote, é bem simples utilizando o devtools.
-Primeiro você deve selecionar sua base e salva-la como .rda na pasta data.
-Para salvar os dados como .rda basta usar o seguinte comando:
+Adicionar bases de dados ao pacote, seja para usar como exemplo ou para disponibiliza-lás para os usuários (como no caso deste pacote), é bem simples e pode ser feito utilizando o devtools.
+Primeiro você deve ter sua base no r, salvo em um objeto e então salva-la como .rda, que pode ser feito da sequinte forma:
+
 ```{r}
 dados = data.frame(a= c(1,2),
                    b= c(3, 4))
 ```
 
 
-```{r, echo=TRUE}
-saveRDS(object = dados, file = 'dados.rda')
+```{r, eval=FALSE, echo=TRUE}
+saveRDS(object = dados, file = 'qqr/data/dados.rda')
 ```
 
-É importante ressaltar que o nome do ojeto deve ser o mesmo do nome salvo.
+É importante ressaltar que o nome do arquivo precisa ser o igual ao nome objeto.
 
-Então basta colocar este arquivo na pasta data e usar ........
+Depois de salvo, você deve armazenar essa base na pasta data e caso ela não exista você deve cria-lá.
+
 
 
 ### Documentando as funções e as bases de dados
@@ -160,11 +164,118 @@ Então basta colocar este arquivo na pasta data e usar ........
 
 ### Publicando o pacote
 
+Finalizado o pacote você pode publicá-lo para que outras pessoas tenham acesso. Existem duas maneiras mais usuais, que é colocando-o em um repositório (GitHub, GitLab, entre outros) ou subindo para o CRAN. 
+Colocando em um repositório as pessoas acessam o pacote tanto pela web quanto pelo R atraves algumas funções especificas. Já no CRAN, seu pacote está na plataforma oficial e portanto pode ser usado com a função *'install.packages()'*.
+
+Será apresentado as duas maneiras de publicar o pacote, sendo que para repositório será usado o GitHub.
+
 #### No GitHub:
+
+Antes de tudo, é necessário que você tenha o Git instalado. Você pode baixar através do link: https://git-scm.com/downloads.
+
+É preciso também ter uma conta no GitHub. Caso não tenha, você pode criar através do link: https://github.com/join.
+
+Com a conta feita, você cria um  novo repositório, escolhe suas preferências de nome, privacidade, colaboradores... Então voce abre a pasta do seu pacote e clica com o botão direito e seleciona 'Git Bash Here'.
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem5.png"),
+               alt = 'Git BAsh')
+```
+</div>
+<br> 
+
+Então irá abrir uma guia do Git, onde você deve colocar seu email e username do GitHub/GitLab da seguinte maneira (com suas credenciais, é claro):
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem6.png"),
+               alt = 'Git config')
+```
+</div>
+<br> 
+
+Esse passo anterior também pode ser feito no terminal do R, ou até mesmo com a seguinte linha de comando:
+
+```{r, eval=FALSE, echo=TRUE}
+usethis::use_git_config(user.name = "maisaand", # Seu nome
+                        user.email = "maisaandrade097@gmail.com") # Seu email
+```
+
+Depois de configurado seus dados, voce digita o comando *git init* no terminal do R ou na guia do Git (os dois processos são iguais, escolha o que preferir) para iniciar o processo. 
+
+Depois, você precisa conectar a sua pasta local com o servidor, que (quando sua pasta local já existe) é feita da seguinte forma:
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem7.png"),
+               alt = 'Git remote')
+```
+</div>
+<br> 
+
+Obs.: Caso queira baixar uma pasta existente no GitHub para o seu computador, digite o comando:
+
+```{r, echo=TRUE, eval=FALSE}
+git clone https://github.com/username/repositorio.git
+```
+
+Depois de conectar sua pasta ao GitHub, o proximo passo é adicionar os arquivos. O comando para isso é:
+
+```{r, echo=TRUE, eval=FALSE}
+git add .
+```
+
+Vale ressaltar que no Git cada espaço importa, então tente prestar muita atenção no código.
+
+Para salvar os arquivos no repositório, o chamado 'commit' use o comando:
+
+```{r, echo=TRUE, eval=FALSE}
+git commit -m"comentário qualquer"
+```
+
+
+E então, finalmente, use:
+
+```{r, echo=TRUE, eval=FALSE}
+git push -u origin master
+```
+
+Esse último comando serve para subir os arquivos para o repositório pela primeira vez. Nas vezes seguintes pode ser utilizado apenas *git push*.
+Assim, se a seguinte mensagem aparecer, pronto! Deu tudo certo e seu pacote já está disponível no Github.
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem8.png"),
+               alt = 'Git push')
+```
+</div>
+<br> 
+
+Agora, para baixar o pacote no R, basta fazer:
+
+```{r, echo=TRUE, eval=FALSE}
+devtools::install_github("https://github.com/jeff25601/qqr", build_vignettes =TRUE)
+```
+
+Um comando que é bastante útil e pode ser usado em qualquer parte do processo é 'git status'. Ele mostra se algum item ainda não foi adicionado, se é preciso 'comitar' os arquivos, e outras informações.
+
+O Git é uma ferramenta com muitos recursos e o que foi mostrado é apenas uma parte superficial. O google pode ser utilizado para encontrar muitas informações e resolver problemas.
 
 #### No CRAN:
 
 
+## Conclusão
+
+Depois de realizar todas as etapas da criação do pacote, pode-se observar na imagem abaixo o repositório oficial do pacote qqr no Github:
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem9.png"),
+               alt = 'GitHub')
+```
+</div>
+<br> 
 
 
 ## Referências
