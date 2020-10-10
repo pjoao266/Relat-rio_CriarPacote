@@ -124,24 +124,55 @@ Existem também outros arquivos que não são criados automáticamente e nem obr
 ### Criando as funções
 
 O procedimento para que você crie funções para o pacote não difere muito do procedimento normal de definição de funções. É necessário definir o nome da função e os argumentos que ela irá receber, no escopo ficam os procedimentos que você quer que a função realize. Abaixo, se tem o exemplo da definição da função _currentData_ do pacote qqr.
-<center>
-```{r}
-htmltools::img(src = knitr::image_uri("imagem10.png"),
-               alt = 'currentData function')
+
+
+```{r,eval=FALSE,echo=T}
+currentData <- function(){
+  site <- xml2::read_html("https://brasileirao.cbf.com.br/tabela-times")
+  tabela <- site %>% rvest::html_table(fill = TRUE)
+  tabela = tabela[[1]]
+  col = colnames(tabela)
+  col[2] = "Time"
+  col[8] = "GC"
+  col[9] = "GP"
+  colnames(tabela) = col
+  Recentes=""
+  tabela = tabela %>%
+    dplyr::mutate(Recentes  = stringr::str_replace_all(Recentes,"\t",""),Recentes  = stringr::str_replace_all(Recentes,"\n","")) %>%
+    dplyr::select(-15)
+  class(tabela) = "tabelaBR"
+  return(tabela)
+}
 ```
-</center>
+
 
 As funções devem ficar em arquivos .R no diretório 'R/', para manter uma boa prática e ter os arquivos mais organizados é recomendado que a função e o arquivo .R tenha o mesmo nome, por exemplo, a função _currentData_ está sendo criada no arquivo currentData.R que está dentro do diretório 'R/'. Além disso, nesse arquivo R é importante que o desenvolvedor documente a função, os elementos da documentação e como documentar será discutido em tópicos futuros do relatório.
 
 
 Outra coisa que pode ser feita é definir nova classe para uma variável e adaptar os metódos comuns para esta nova classe criada. O primeiro passo é definir uma classe para alguma variável que será retornada, na função _currentData_ a variável tabela passou a ter classe "tabelaBR", após isso é necessário adaptar os métodos. No arquivo print.tabelaBR.R criamos a função _print.tabelaBR_, note que é necessário que antes do '.' esteja o nome de um função comumente utilizada e após o '.' esteja a classe que você queira adaptar o método. No escopo da função você programa o procedimento para essa classe. Para fixar, se você quiser adaptar a função summary para a classe 'DestUFMG' é necessário criar a função _summary.DestUFMG_. A seguir é mostrado o código da função _print.tabelaBR_ e sua documentação. 
 
-<center>
-```{r}
-htmltools::img(src = knitr::image_uri("imagem11.png"),
-               alt = 'print.tabelaBR function')
+
+```{r,eval=FALSE,echo=T}
+#'@title Print for \code{tabelaBR} objects
+#'@description Print objects with class \emph{tabelaBR}.
+#'@usage \method{print}{tabelaBR}(x,...)
+#'@param x An object with class \emph{tabelaBR}.
+#'@param ... further arguments passed to or from other methods.
+#'@seealso \code{\link{previousData}}, \code{\link{currentData}}
+#'@examples
+#'tabela = previousData(2019)
+#'print(tabela)
+#'@export
+print.tabelaBR  = function(x,...){
+  class(x) = "data.frame"
+
+  cat("----------------------BRAZILIAN SOCCER CHAMPIONSHIP----------------------\n")
+  print(x)
+  cat("-------------------------------------------------------------------------")
+}
+
 ```
-</center>
+
 
 Se o pacote não está pronto ainda, mas você quer testar as funções já criadas é possível utilizar a função load_all que carrega as funções temporiamente, após usá-las é recomendado utilizar a função unload para apagar as funções do ambiente.
 
@@ -173,8 +204,225 @@ Depois de salvo, você deve armazenar essa base na pasta data e caso ela não ex
 
 ### Documentando as funções e as bases de dados
 
-### Document
+A documentação é um dos aspectos mais importantes de um bom pacote. Sem ele, os usuários não saberão como usar seu pacote. A documentação também é útil para desenvolvedores que queiram estender seu pacote.
 
+O R fornece uma maneira padrão de documentar os objetos em um pacote: você grava arquivos .Rd no diretório '/man'. Esses arquivos usam uma sintaxe personalizada, vagamente baseada em LaTeX, e são renderizados em HTML. Ao invés de escrever esses arquivos manualmente, usaremos o roxygen2, que transforma comentários especialmente formatados em arquivos .Rd.
+
+Para documentar uma função bastar adicionar comentários no seu arquivo .R bem acima do escopo da função. No caso da documentação de um banco de dados é necessário criar um arquivo .R com o nome do banco de dados e adicionar os comentários a partir daí, ao final da documentação é necessário colocar uma linha sem ser comentário com o nome do banco de dados entre aspas.
+
+
+O processo começa quando você adiciona comentários do roxygen ao seu arquivo de origem: os comentários do roxygen começam com #' para distingui-los dos comentários regulares.
+
+Todas as linhas que precedem uma função são chamadas de bloco. Os blocos são divididos em tags, que parecem @tagName. O conteúdo de uma tag se estende do final do nome da tag até o início da próxima tag, ou até o final do bloco.
+
+Antes de usar-se a primeira tag pode-se utilizar blocos sem tags, que assumem:
+
+- Primeiro bloco: Título da documentação, mesmo que usar a tag @title.
+- Segundo bloco: Descrição da função ou do banco de dados, mesmo que usar a tag @description.
+- Terceiro bloco e demais blocos: Detalhes, uma seção geralmente longa que entra em detalhes sobre como a função funciona ou sobre como o banco de dados foi obtido, mesmo que usar a tag @details.
+
+#### Documentando uma função 
+
+No código abaixo tem-se a representação de uma documentação para a função _currentData_, é possível notar o uso de algumas tags. 
+
+```{r,eval=FALSE,echo=T}
+#' Get current data of the brazilian soccer championship
+#'
+#' Number of points, victories, defeats, ties and more info about the current brazilian soccer championship
+#' @return An object with class \emph{tabelaBR} containing the information of the brazilian soccer championship from the year desired.
+#' @encoding UTF-8
+#' @import xml2
+#' @import rvest
+#' @import tidyverse
+#' @import stringr
+#' @import dplyr
+#'@seealso \code{\link{previousData}}
+#' @export
+#' @examples
+#' currentData()
+currentData <- function(){
+  site <- xml2::read_html("https://brasileirao.cbf.com.br/tabela-times")
+  tabela <- site %>% rvest::html_table(fill = TRUE)
+  tabela = tabela[[1]]
+  col = colnames(tabela)
+  col[2] = "Time"
+  col[8] = "GC"
+  col[9] = "GP"
+  colnames(tabela) = col
+  Recentes=""
+  tabela = tabela %>%
+    dplyr::mutate(Recentes  = stringr::str_replace_all(Recentes,"\t",""),Recentes  = stringr::str_replace_all(Recentes,"\n","")) %>%
+    dplyr::select(-15)
+  class(tabela) = "tabelaBR"
+  return(tabela)
+}
+
+```
+
+
+Tags importantes para a documentação de uma função estão listadas a seguir:
+
+- @aliases: Define aliases para a documentação. Um alias é outro nome com o qual pode ser usado a função help.
+
+- @param name description: descreve os parâmetros da função. A descrição deve fornecer o tipo do parâmetro e o que este faz.
+
+- @return description: descreve a saída da função.
+
+- @examples: dá exemplos para o uso da função. É importante lembrar que os resumos para ser aceitos pelo CRAN não devem exceder o tempo de 10 segundos de execução.
+
+- @export: se essa tag estiver presente a função será exportada.
+
+- @seealso: comumente utilizada com os marcadores \\code e \\link, cria links para outras documentações do mesmo pacote ou não.
+
+- @usage: ilustra a função e todos seus parâmetros.
+
+- @references: referências da função.
+
+- @import: pacotes importados para executar aquela função.
+
+
+
+#### Documentando um banco de dados
+
+
+No código abaixo tem-se a representação de uma documentação para o banco de dados função _BRSoccer2014_, é possível notar o uso de algumas tags. 
+
+```{r,eval=FALSE,echo=T}
+#' Table of the 2014th Brazilian Soccer Championship.
+#'
+#' This data set gives the position of each brazilian soccer team
+#' in the 2014th championship with the number of points, games played,
+#' victories, ties, defeats, goal difference, goals scored and goals suffered.
+#'
+#' @format A data frame with 20 rows and 9 variables
+#' \describe{
+#'   \item{Times}{name of the teams}
+#'   \item{P}{number of points scored (3 * V + E)}
+#'   \item{J}{number of matches played (V + E + D)}
+#'   \item{V}{number of victories}
+#'   \item{E}{number of ties}
+#'   \item{D}{number of defeats}
+#'   \item{SG}{goals difference (G - GC)}
+#'   \item{G}{goals scored}
+#'   \item{GC}{goals suffered}
+#' }
+#' @source <https://www.tabeladobrasileirao.net/2014/serie-a/>
+"BRSoccer2014"
+
+```
+
+Tags importantes para a documentação de um banco de dados estão listadas a seguir:
+
+- @aliases: Define aliases para a documentação. Um alias é outro nome com o qual pode ser usado a função help.
+
+- @format: fornece uma visão geral do conjunto de dados, sendo possível descrever cada variável do banco.
+
+- @examples: dá exemplos para o uso do banco de dados. É importante lembrar que os resumos para ser aceitos pelo CRAN não devem exceder o tempo de 10 segundos de execução.
+
+- @seealso: comumente utilizada com os marcadores \\code e \\link, cria links para outras documentações do mesmo pacote ou não.
+
+- @usage: ilustra como acessar o banco de dados.
+
+- @source: fornece detalhes de onde você obteve os dados, geralmente a \\url
+
+- @references: artigos, sites ou revistas que falam sobre o banco de dados.
+
+Um erro comum é usar a tag @export em um banco de dados, os bancos de dados não precisam da tag export para estarem disponivéis no namespace do pacote.
+
+
+### Arquivo DESCRIPTION
+
+O objetivo do arquivo DESCRIPTION é armazenar metadados importantes sobre o seu pacote. Ao começar a escrever pacotes, você usará principalmente esses metadados para registrar quais pacotes são necessários para executar seu pacote. Porém, conforme o tempo passa e você começa a compartilhar seu pacote com outras pessoas, o arquivo de metadados torna-se cada vez mais importante porque especifica quem pode usá-lo e quem contatar se houver algum problema, a seguir está o arquivo DESCRIPTION do pacote qqr:
+
+
+```{r, eval=FALSE, echo=TRUE}
+Package: qqr
+Version: 0.0.0.9000
+Title: Data from Brazilian Soccer Championship
+Description: Get data about the brazilian soccer championship since 2014.
+License: GPL-2
+Depends: 
+    xml2,
+    rvest,
+    tidyverse,
+    dplyr (>= 0.2),
+    stringr,
+    R (>= 2.10)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Suggests: 
+    knitr,
+    rmarkdown
+Authors@R: 
+    c(person(given = "Jeferson",
+             family = "Andrade",
+             role = c("aut", "cre"),
+             email = "jefersonandrafee@gmail.com"),
+      person(given = "Joao",
+             family = "Melo",
+             role = "aut"),
+      person(given = "Maisa",
+             family = "Andrade",
+             role = "aut"),
+      person(given = "Andre",
+             family = "Kalinovski",
+             role = "aut"))
+Maintainer: Jeferson Andrade <jefersonandrafee@gmail.com>
+VignetteBuilder: knitr
+```
+
+O arquivo DESCRIPTION consiste dos seguintes itens: 
+
+
+- Package: nome do pacote
+
+- Version: Um número de versão consiste em três partes (0.0.1), porém um pacote em desenvolvimento possui um quarto componente a ser utilizado (0.0.0.9000). Mas ao mandar o pacote para o CRAN o seu número de versão deve consistir em apenas 3 partes.
+
+- Title: descrição de uma linha do pacote. Deve ser um texto simples, formatação de título e não pode conter um ponto no final.
+
+- Description: é mais detalhado que o título. Você pode usar várias frases, mas está limitado a um parágrafo.
+
+- LazyData: torna mais fácil acessar dados em seu pacote.
+
+Para identificar o autor do pacote e quem contatar se algo der errado, use o campo Authors@R combinado com a função person. Os paramêtros dessa função são:
+
+- name: o nome do autor
+- email: email do autor
+- role: função do autor, existindo 4 funções mais importantes:
+  - cre: o criador, a pessoa que você deve incomodar se tiver problemas.
+  - aut: autores, aqueles que fizeram contribuições significativas para o pacote.
+  - ctb: contribuidores, aqueles que fizeram contribuições menores, como patches.
+  - cph: Detentor dos direitos autorais.
+
+O item Maintainer necessita do nome e do email do criador do pacote.
+
+Para o campo LICENSE, existem 3 tipos de Licenças principais para utilizar no pacote, são elas:
+
+- MIT: Permite que as pessoas usem e distribuam livremente seu código, porém a licença deve ser sempre distribuída juntamente com o código.
+
+- GPL-2 ou GPL-3: Diz que qualquer pessoa que distribuir seu código em um pacote deve licenciar todo o pacote de uma forma compatível com GPL.
+
+- CC0:  Abre mão de todos os seus direitos sobre o código e os dados para que possam ser usados livremente por qualquer pessoa para qualquer propósito. 
+
+
+Por fim, para citar os pacotes necessários para o seu pacote funcionar existem alguns itens, e o uso de cada um deles depende do que vc necessita, são eles:
+
+- Imports: os pacotes listados aqui devem estar presentes para que seu pacote funcione. Isto é, sempre que seu pacote for instalado, esses pacotes também serão caso não esteja instalado ainda.
+
+- Suggests: seu pacote pode usar esses pacotes, mas não os exige.
+
+- Depends: depreciado, use Imports.
+
+- LinkingTo: os pacotes listados aqui dependem do código C ou C ++ em outro pacote.
+
+- Enhances: os pacotes listados aqui são aprimorados pelo seu pacote, porém seu uso é confuso e não recomendado.
+
+Ainda sobre as dependências do pacote, tem-se que eles devem ser listados seguidos de virgula. É possível também definir uma versão mínima suportada para o pacote exigido. A forma de listar esses pacotes, fica mais clara olhando o exemplo de arquivo DESCRIPTION que foi apresentado no começo dessa seção.
+
+
+Além desses itens apresentados, existem itens para a codificação, compilador de vignettes, versão do Roxygen, e vários outros itens, que necessitam de um aprofundamento maior no tema para o entedimento.
 
 ### Vignettes
 

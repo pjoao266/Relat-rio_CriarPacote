@@ -29,6 +29,7 @@ editar o arquivo document -> J
 	maintener e autores: pode-se varios autores, mas apenas 1 maintener
 	VignetteBuilder
 	explicar as diferenças entre import, depends, suggests
+ok
 --------------------------------------------------------------
 vignettes -> J
 	criar
