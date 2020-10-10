@@ -43,6 +43,7 @@ ok
 -------------------------------------------------------------
 ------------------------
 explicar namespace -> J
+ok
 ------------------------
 instalar localmente -> J
 (falar pro andre mostrar o pacote na apresentação)
