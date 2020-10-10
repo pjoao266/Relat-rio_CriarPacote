@@ -38,6 +38,8 @@ vignettes -> J
 documentar (criar os helps, preparar o pacote pra instalação) -> J
 
 Falar sobre compilação e mostrar a função (compile_dll) -> J
+
+ok
 -------------------------------------------------------------
 ------------------------
 explicar namespace -> J

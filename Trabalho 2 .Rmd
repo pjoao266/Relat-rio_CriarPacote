@@ -203,8 +203,32 @@ devtools::build_vignettes()
 ```
 ### Preparando o pacote para instalação
 
+As documentações que você criou para as funções e bancos de dados, e a documentação do pacote precisam ser transformadas de forma que possibilite a instalação do pacote. As documentações de funções e bancos serão transformados em arquivos .Rd que criarão o help de cada função e banco. O que foi escrito no arquivo DOCUMENT será usado para atualizar o arquivo Namespace, que auxilia na instalação do pacote. Para executar isso é necessário rodar a função document do pacote devtools. 
 
-### NameSpace
+```{r, eval=FALSE, echo=TRUE}
+devtools::document()
+```
+
+Outra forma de documentar o pacote é clicando em "Build Source Package" na aba Build, como pode ser visto na imagem.
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem14.png"),
+               alt = 'buttonBuildSource')
+```
+</div>
+
+
+Se o pacote necessitar de compilação (por exemplo: pacotes com o RStan) é necessário rodar a função compile_dll do pacote pkgbuild antes de executar a função document.
+
+```{r, eval=FALSE, echo=TRUE}
+pkgbuild::compile_dll()
+```
+
+
+Após ter o Namespace e os arquivos .Rd atualizados é possível instalar o pacote localmente. 
+
+### Namespace
 
 
 ### Instalando o pacote localmente
