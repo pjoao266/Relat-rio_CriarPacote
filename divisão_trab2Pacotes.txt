@@ -35,6 +35,9 @@ vignettes -> J
 	build
 --------------------------------------------------------------
 documentar (criar os helps, preparar o pacote pra instalação) -> J
+
+Falar sobre compilação e mostrar a função (compile_dll) -> J
+-------------------------------------------------------------
 ------------------------
 explicar namespace -> J
 ------------------------
@@ -57,8 +60,6 @@ No CRAN: -> J
 ------------------------------------------------------------------------------------------
 Especificar que usamos o devtools, e q existem outras formas -> M (passei pra introdução) OK
 --------------------------------------------------------------------------------------------
-Falar sobre compilação e mostrar a função (compile_dll) -> J
--------------------------------------------------------------
 Conclusão / Resultados -> M
     - Dificuldades no processo
     - Mostrar tanto a pagina do CRAN

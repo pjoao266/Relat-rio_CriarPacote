@@ -326,7 +326,7 @@ htmltools::img(src = knitr::image_uri("imagem9.png"),
 </div>
 
 
-# Funcionalidades do pacote qqr
+#### Funcionalidades do pacote qqr
 
 A primeira coisa a ser feita é carregar o pacote através da função library. Após isso poderá se mostrar as funcionalidaddes do pacote, como foi ensinado criou-se um banco de dados para o pacote, o código a seguir mostra como acessar o banco de dados que retorna a tabela do Campeonato Brasileiro de 2014.
 
