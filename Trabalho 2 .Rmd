@@ -179,9 +179,6 @@ Depois de salvo, você deve armazenar essa base na pasta data e caso ela não ex
 ### Vignettes
 
 
-### Criando o help do pacote
-
-
 ### Preparando o pacote para instalação
 
 
@@ -313,6 +310,80 @@ O Git é uma ferramenta com muitos recursos e o que foi mostrado é apenas uma p
 
 #### No CRAN:
 
+O processo de mandar o pacote para o CRAN se torna bastante complicado pelo fato de ser muito criteriosa. A correção automática feita pelo CRAN retorna os errors (erros), warnings (avisos) e notes (notas). Notas são toleráveis, porém se for observado um erro ou aviso o pacote não será aceito. Após passar pela correção automática, o pacote será feita uma inspeção manual no pacote com objetivo de observar possíveis erros de escrita e não encaixe no padrão requerido pelo CRAN. Se o pacote não conter erros, ele será publicado, caso contrário você deve corrigir os erros apresentados e submeter o pacote para avaliação novamente. Segue abaixo um tutorial para a submissão.
+
+
+A função check do pacote realiza a correção automática localmente, tornando o processo mais fácil. Existem outras funções que checam o pacote em diferentes sistemas operacionais que acaba sendo útil para o desenvolvedor, todas essas funções podem ser vistas no help do pacote devtools.
+
+```{r, eval=FALSE, echo=TRUE}
+devtools::check()
+```
+
+Outra maneira para realizar a correção automática localmente é clicando no botão Check da aba Build como a imagem abaixo ilustra.
+
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem13.png"),
+               alt = 'buttonCheck')
+```
+</div>
+
+É possível observar que a checagem nos retornou 0 erros, 0 avisos e 0 notas, por isso pode-se avançar para o próximo procedimento, caso nos retornasse algum erro a prioridade passaria a ser corrigir o erro para depois ir para a próxima etapa.
+
+A função build do pacote devtools compacta os diretórios da função para o formato '.tar.gz' que é o formato que o CRAN recebe o pacote. O arquivo é salvo por padrão no mesmo diretório que a pasta com o pacote.
+
+```{r, eval=FALSE, echo=TRUE}
+devtools::build()
+```
+
+Outra forma de compactação é clicando em "Build Binary Package" na aba Build, como pode ser visto na imagem.
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem14.png"),
+               alt = 'buttonBuild')
+```
+</div>
+
+
+Com o arquivo "tar.gz" criado é necessário acessar o site <a href="https://cran.r-project.org/submit.html"> https://cran.r-project.org/submit.html </a> e preencher as informações com seu nome, email e selecionando o arquivo criado pela função build. A imagem abaixo ilustra o procedimento.
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem15.png"),
+               alt = 'pageInitial')
+```
+</div>
+
+Após clicar em 'Upload Package', você será redirecionado para uma página para confirmar as informações as informações do pacote. Ao conferir e, se achar pertinente, mudar as informações clique em 'Submit Package', clicando o CRAN irá mandar um email para o endereço eletrônico do _mainteiner_ com um link para a confirmação do envio.
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem16.png"),
+               alt = 'emailConfirmation')
+```
+</div>
+
+O link o levará para a página mostrada na próxima imagem onde você deve concordar com os termos e clicar em 'Upload Package to CRAN'.
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem17.png"),
+               alt = 'siteConfirmation')
+```
+</div>
+
+Após isso o pacote passará por uma correção automática, que pode retornar via email um erro para ser corrigido ou informar que o pacote está no CRAN. A imagem abaixo ilustra o email que chega quando o pacote é aprovado pelo CRAN.
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem18.png"),
+               alt = 'mailAccepted')
+```
+</div>
+
+Após aprovado, o pacote já pode ser instalado e usado por todos os usuários e em todas os sistemas operacionais.
 
 ## Conclusão
 

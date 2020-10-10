@@ -43,6 +43,7 @@ explicar namespace -> J
 ------------------------
 instalar localmente -> J
 (falar pro andre mostrar o pacote na apresentação)
+ok
 -------------------------------------------------------------------------
 falar das formas para disponibilizar o pacote para outros usuarios -> M
 	github
