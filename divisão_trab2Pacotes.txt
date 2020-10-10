@@ -33,6 +33,7 @@ editar o arquivo document -> J
 vignettes -> J
 	criar
 	build
+	ok
 --------------------------------------------------------------
 documentar (criar os helps, preparar o pacote pra instalação) -> J
 
@@ -52,12 +53,14 @@ falar das formas para disponibilizar o pacote para outros usuarios -> M
 No github: ->M
 	subir arquivos pro github
 	instalar pela função install_github
+ok
 --------------------------------------------------------------------------
 No CRAN: -> J
 	checar o pacote
 	outras formas de checar o pacote
 	compilar o pacote (gerar o arquivo tar.gz)
 	procedimento de mandar para o CRAN
+ok
 ------------------------------------------------------------------------------------------
 Especificar que usamos o devtools, e q existem outras formas -> M (passei pra introdução) OK
 --------------------------------------------------------------------------------------------

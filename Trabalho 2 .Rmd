@@ -178,7 +178,29 @@ Depois de salvo, você deve armazenar essa base na pasta data e caso ela não ex
 
 ### Vignettes
 
+Um vignette é um guia longo para o seu pacote. A documentação da função é ótima se você sabe o nome da função de que precisa, mas não serve se não sabe. Um vignette é como um capítulo de livro ou um artigo acadêmico: ele pode descrever o problema que sua embalagem foi projetada para resolver e, em seguida, mostrar ao leitor como resolvê-lo. Um vignette deve dividir as funções em categorias úteis e demonstrar como coordenar várias funções para resolver problemas. Os vignettes também são úteis se você quiser explicar os detalhes do seu pacote, por exemplo, se você implementou um algoritmo estatístico complexo, convém descrever todos os detalhes em um vignette para que os usuários de seu pacote possam entender o que está acontecendo nos bastidores e ter certeza de que implementou o algoritmo corretamente.
 
+Para criar um vignette basta utilizar a função use_vignette do pacote usethis. A função cria um arquivo .rmd dentro do diretório '/vignettes'.
+
+
+```{r, eval=FALSE, echo=TRUE}
+usethis::use_vignette("qqr Package")
+```
+
+Com o arquivo .rmd criado os metadados devem seguir um padrão que é mostrado na imagem abaixo. O conteúdo do RMarkdown você pode fazer da maneira que bem entender e quiser apresentar.
+
+<center>
+```{r}
+htmltools::img(src = knitr::image_uri("imagem19.png"),
+               alt = 'vignettes')
+```
+</center>
+
+Após ter escrito e finalizado o RMarkdown dos vignettes, é necessário utilizar a função build_vignettes, do pacote devtools, para compilar todos os vignettes presentes no pacote e deixá-los na maneira correta de apresentação.   
+
+```{r, eval=FALSE, echo=TRUE}
+devtools::build_vignettes()
+```
 ### Preparando o pacote para instalação
 
 
