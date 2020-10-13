@@ -407,7 +407,7 @@ Para o campo LICENSE, existem 3 tipos de Licenças principais para utilizar no p
 - CC0:  Abre mão de todos os seus direitos sobre o código e os dados para que possam ser usados livremente por qualquer pessoa para qualquer propósito. 
 
 
-Por fim, para citar os pacotes necessários para o seu pacote funcionar existem alguns itens, e o uso de cada um deles depende do que vc necessita, são eles:
+Por fim, para citar os pacotes necessários para o seu pacote funcionar existem alguns itens, e o uso de cada um deles depende do que você necessita, são eles:
 
 - Imports: os pacotes listados aqui devem estar presentes para que seu pacote funcione. Isto é, sempre que seu pacote for instalado, esses pacotes também serão caso não esteja instalado ainda.
 
