@@ -51,21 +51,21 @@ devtools::install_github("https://github.com/jeff25601/qqr")
 ## O ambiente do pacote
 
 - Para criar o ambiente do pacote, siga as seguintes etapas:
-- 1) Clique em R Project > New Project
+  - Clique em R Project > New Project
 
 <center>
 ![](imagem1.png)
 </center>
 
 ## O ambiente do pacote
-- 2) Selecione New Directory > R Package.
+  - Selecione New Directory > R Package.
 
 <center>
 ![](imagem2.png)
 </center>
 
 ## O ambiente do pacote
-- 3) Preencha com as informações adequadas
+  - Preencha com as informações adequadas
 
 <center>
 ![](imagem3.png)
