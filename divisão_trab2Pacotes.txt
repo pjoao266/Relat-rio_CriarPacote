@@ -16,6 +16,7 @@ criar as funções -> J
 OK
 ------------------------------------------------------
 definir os bancos de dados -> M
+OK
 -----------------------------------------------
 documentar as funções e bancos de dados -> J
 	explicar cada item
@@ -51,8 +52,9 @@ instalar localmente -> J
 ok
 -------------------------------------------------------------------------
 falar das formas para disponibilizar o pacote para outros usuarios -> M
-	github
+	github 
 	CRAN
+OK
 ------------------------------------------------------------------
 No github: ->M
 	subir arquivos pro github

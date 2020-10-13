@@ -42,7 +42,7 @@ Neste trabalho vamos mostrar como transformar suas funções em um pacote e publ
 
 ### O Pacote qqr
 
-Como exemplo de como criar um pacote, vamos apresentar todo o passo a passo de criação do pacote qqr. Este pacote tem como funcionalidade a leitura da tabela oficial do Brasileirão 2020 atualizada além de ter disponível a tabela do campeonato referente a 2014.
+Como exemplo de como criar um pacote, vamos apresentar todo o passo a passo de criação do pacote qqr. Este pacote tem como funcionalidade a leitura da tabela oficial do Brasileirão 2020 atualizada além das tabelas de edições passadas (2015 a 2019) e tem disponível a tabela do campeonato referente ao ano de 2014.
 
 Destaca-se que existem várias formas de criar um pacote. Iremos criar usando o pacote *devtools*, que é uma maneira mais simples e que possui funções para criar, conferir o pacote, testar e documentar as funções, tudo dentro de uma sessão do R.
 
@@ -50,7 +50,7 @@ Destaca-se que existem várias formas de criar um pacote. Iremos criar usando o 
 
 ### Criando o ambiente do pacote
 
-O primeiro passa na criação de um pacote é criar um ambiente. Isso pode ser feito da seguinte forma:
+O primeiro passo na criação de um pacote é criar um ambiente. Isso pode ser feito da seguinte forma:
 
   1. Primeiro clique em R Project > New Project.  
 
@@ -183,10 +183,11 @@ unload()   # descarrega as funções
 
 ### Adicionando uma base de dados no pacote
 
-Adicionar bases de dados ao pacote, seja para usar como exemplo ou para disponibiliza-lás para os usuários (como no caso deste pacote), é bem simples e pode ser feito utilizando o devtools.
+Adicionar bases de dados ao pacote, seja para usar como exemplo ou para disponibiliza-lás para os usuários, é bem simples e pode ser feito utilizando o devtools.
 Primeiro você deve ter sua base no r, salvo em um objeto e então salva-la como .rda, que pode ser feito da sequinte forma:
 
 ```{r}
+#Exemplo
 dados = data.frame(a= c(1,2),
                    b= c(3, 4))
 ```
@@ -199,7 +200,6 @@ saveRDS(object = dados, file = 'qqr/data/dados.rda')
 É importante ressaltar que o nome do arquivo precisa ser o igual ao nome objeto.
 
 Depois de salvo, você deve armazenar essa base na pasta data e caso ela não exista você deve cria-lá.
-
 
 
 ### Documentando as funções e as bases de dados
@@ -449,6 +449,7 @@ Após ter escrito e finalizado o RMarkdown dos vignettes, é necessário utiliza
 ```{r, eval=FALSE, echo=TRUE}
 devtools::build_vignettes()
 ```
+
 ### Preparando o pacote para instalação
 
 As documentações que você criou para as funções e bancos de dados, e a documentação do pacote precisam ser transformadas de forma que possibilite a instalação do pacote. As documentações de funções e bancos serão transformados em arquivos .Rd que criarão o help de cada função e banco. Além disso, a função o arquivo Namespace é atualizado a partir da documentação feita. Para executar isso é necessário rodar a função document do pacote devtools. 
@@ -515,6 +516,7 @@ htmltools::img(src = knitr::image_uri("imagem12.png"),
                alt = 'Install and Restart')
 ```
 </center>
+<br> 
 
 Outra forma de instalar o pacote localmente é através da seguinte linha de código:
 
@@ -532,7 +534,7 @@ Após instalado, é possível carregar o pacote e começar a usar suas funcional
 ### Publicando o pacote
 
 Finalizado o pacote você pode publicá-lo para que outras pessoas tenham acesso. Existem duas maneiras mais usuais, que é colocando-o em um repositório (GitHub, GitLab, entre outros) ou subindo para o CRAN. 
-Colocando em um repositório as pessoas acessam o pacote tanto pela web quanto pelo R atraves algumas funções especificas. Já no CRAN, seu pacote está na plataforma oficial e portanto pode ser usado com a função *'install.packages()'*.
+Colocando em um repositório as pessoas acessam o pacote tanto pela web quanto pelo R atraves de funções especificas. Já no CRAN, seu pacote está na plataforma oficial e portanto pode ser usado com a função *'install.packages()'*.
 
 Será apresentado as duas maneiras de publicar o pacote, sendo que para repositório será usado o GitHub.
 
@@ -542,7 +544,7 @@ Antes de tudo, é necessário que você tenha o Git instalado. Você pode baixar
 
 É preciso também ter uma conta no GitHub. Caso não tenha, você pode criar através do link: https://github.com/join.
 
-Com a conta feita, você cria um  novo repositório, escolhe suas preferências de nome, privacidade, colaboradores... Então voce abre a pasta do seu pacote e clica com o botão direito e seleciona 'Git Bash Here'.
+Com a conta feita, você cria um  novo repositório, escolhe suas preferências de nome, privacidade, colaboradores... Então voce abre a pasta local do seu pacote, clica com o botão direito e seleciona 'Git Bash Here'.
 
 <div align="center">
 ```{r}
@@ -552,7 +554,7 @@ htmltools::img(src = knitr::image_uri("imagem5.png"),
 </div>
 <br> 
 
-Então irá abrir uma guia do Git, onde você deve colocar seu email e username do GitHub/GitLab da seguinte maneira (com suas credenciais, é claro):
+Irá abrir então, uma guia do Git, onde você deve colocar seu email e username do GitHub/GitLab da seguinte maneira (com suas credenciais, é claro):
 
 <div align="center">
 ```{r}
@@ -562,16 +564,16 @@ htmltools::img(src = knitr::image_uri("imagem6.png"),
 </div>
 <br> 
 
-Esse passo anterior também pode ser feito no terminal do R, ou até mesmo com a seguinte linha de comando:
+Esse passo anterior também pode ser feito no terminal do R, ou em um script r com a seguinte linha de comando:
 
 ```{r, eval=FALSE, echo=TRUE}
 usethis::use_git_config(user.name = "maisaand", # Seu nome
                         user.email = "maisaandrade097@gmail.com") # Seu email
 ```
 
-Depois de configurado seus dados, voce digita o comando *git init* no terminal do R ou na guia do Git (os dois processos são iguais, escolha o que preferir) para iniciar o processo. 
+Depois de configurado seus dados, voce digita o comando *git init* no terminal do R ou na guia do Git (os dois processos são iguais, portanto escolha o que preferir) para iniciar o processo. 
 
-Depois, você precisa conectar a sua pasta local com o servidor, que (quando sua pasta local já existe) é feita da seguinte forma:
+O próximo passo é conectar a sua pasta local com o servidor, que (quando sua pasta local já existe) é feita da seguinte forma:
 
 <div align="center">
 ```{r}
@@ -595,7 +597,7 @@ git add .
 
 Vale ressaltar que no Git cada espaço importa, então tente prestar muita atenção no código.
 
-Para salvar os arquivos no repositório, o chamado 'commit' use o comando:
+Para salvar os arquivos no repositório, o chamado 'commit', use o comando:
 
 ```{r, echo=TRUE, eval=FALSE}
 git commit -m"comentário qualquer"
@@ -649,6 +651,7 @@ htmltools::img(src = knitr::image_uri("imagem13.png"),
                alt = 'buttonCheck')
 ```
 </div>
+<br> 
 
 É possível observar que a checagem nos retornou 0 erros, 0 avisos e 0 notas, por isso pode-se avançar para o próximo procedimento, caso nos retornasse algum erro a prioridade passaria a ser corrigir o erro para depois ir para a próxima etapa.
 
@@ -666,6 +669,7 @@ htmltools::img(src = knitr::image_uri("imagem14.png"),
                alt = 'buttonBuild')
 ```
 </div>
+<br> 
 
 
 Com o arquivo "tar.gz" criado é necessário acessar o site <a href="https://cran.r-project.org/submit.html"> https://cran.r-project.org/submit.html </a> e preencher as informações com seu nome, email e selecionando o arquivo criado pela função build. A imagem abaixo ilustra o procedimento.
@@ -676,6 +680,7 @@ htmltools::img(src = knitr::image_uri("imagem15.png"),
                alt = 'pageInitial')
 ```
 </div>
+<br> 
 
 Após clicar em 'Upload Package', você será redirecionado para uma página para confirmar as informações as informações do pacote. Ao conferir e, se achar pertinente, mudar as informações clique em 'Submit Package', clicando o CRAN irá mandar um email para o endereço eletrônico do _mainteiner_ com um link para a confirmação do envio.
 
@@ -685,6 +690,7 @@ htmltools::img(src = knitr::image_uri("imagem16.png"),
                alt = 'emailConfirmation')
 ```
 </div>
+<br> 
 
 O link o levará para a página mostrada na próxima imagem onde você deve concordar com os termos e clicar em 'Upload Package to CRAN'.
 
@@ -694,6 +700,7 @@ htmltools::img(src = knitr::image_uri("imagem17.png"),
                alt = 'siteConfirmation')
 ```
 </div>
+<br> 
 
 Após isso o pacote passará por uma correção automática, que pode retornar via email um erro para ser corrigido ou informar que o pacote está no CRAN. A imagem abaixo ilustra o email que chega quando o pacote é aprovado pelo CRAN.
 
@@ -703,6 +710,7 @@ htmltools::img(src = knitr::image_uri("imagem18.png"),
                alt = 'mailAccepted')
 ```
 </div>
+<br> 
 
 Após aprovado, o pacote já pode ser instalado e usado por todos os usuários e em todas os sistemas operacionais.
 
@@ -716,6 +724,7 @@ htmltools::img(src = knitr::image_uri("imagem9.png"),
                alt = 'GitHub')
 ```
 </div>
+<br> 
 
 
 #### Funcionalidades do pacote qqr
