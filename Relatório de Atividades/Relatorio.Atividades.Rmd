@@ -1,0 +1,79 @@
+---
+title: "Relatório de Atividades"
+author: "André, Jefersson, João Pedro e Maísa"
+date: "13/10/2020"
+output:
+  html_document:
+    theme: yeti
+  pdf_document: default
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+  
+```{r}
+htmltools::img(src = knitr::image_uri("UFMG-logo.png"), 
+               alt = 'logo', 
+               style = 'position:absolute; top:0; right:0;  padding:10px;width: 150px'
+)
+```
+
+Para a realização do trabalho 2 da disciplina Pacotes Estatísticos, foi necessário realizar algumas reuniões virtuais onde foi decidido o que seria feito no trabalho, como isso seria feito e apresentado, e quem ficaria responsável pelo o quê. 
+Assim, decidimos usar o tema "Como fazer um pacote no R". 
+Então primeiro 
+
+Para a realização do trabalho 2 da disciplina Pacotes Estatísticos, foi necessário
+realizar algumas reuniões virtuais, onde decidimos o que seria feito no trabalho, como 
+ele seria apresentado e como seriam divididas as tarefas entre os integrantes do grupo.
+Optamos pelo tema "Como fazer um pacote no R".
+
+Após a decisão do tema, dividimos as etapas do trabalho da seguinte forma:
+
+- **Criação do Pacote** 
+  
+    Implementação do código com suas respectivas funções; 
+    Documentação do pacote;  
+    Verificação do pacote;  
+    Submissão do pacote ao CRAN;  
+    Disponibilização do pacote no GitHub.  
+  
+    Responsável: Jeferson  
+  
+  
+- **Relatório**  
+
+    Introdução;  
+    Passo a passo;  
+    Conclusão.
+  
+    Responsáveis: João Pedro e Maísa
+  
+  
+- **Apresentação**
+
+    Arquivo de apresentação  
+    Vídeo da apresentação
+  
+    Responsáveis: André e João Pedro
+  
+  
+- **Relatório de atividades**
+
+    Responsável: Maísa
+  
+  
+- **Revisão de texto final**
+
+    Responsável: André
+  
+
+- **Responder perguntas no Moodle**
+
+    Responsáveis: Jeferson, João Pedro e Maísa
+    
+
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+
+  
