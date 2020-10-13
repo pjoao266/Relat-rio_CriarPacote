@@ -36,7 +36,7 @@ if (!require("qqr")){devtools::install_github("https://github.com/jeff25601/qqr"
 
 ### A escolha do tema
 
-O grupo escolheu o tema *'Como fazer um pacote no R'* por acha-lo um tema relevante para o conteúdo da disciplina, onde pode-se aplicar os vários conhecimentos adquiridos até aqui, como por exemplo o uso frequente de funções criadas. Quando se realiza um mesmo processo varias vezes, criar uma função que ajude nessa tarefa é muito útil. E para que fique mais simples acessar essa função, pode-se criar um pacote para guarda-lá. Além disso, esse pacote pode ser publicado para que as suas funções possam ser usadas e aprimoradas por outros usuários.
+O grupo escolheu o tema *'Como fazer um pacote no R'* por achá-lo um tema relevante para o conteúdo da disciplina, onde pode-se aplicar os vários conhecimentos adquiridos até aqui, como por exemplo o uso frequente de funções criadas. Quando se realiza um mesmo processo varias vezes, criar uma função que ajude nessa tarefa é muito útil. E para que fique mais simples acessar essa função, pode-se criar um pacote para guarda-lá. Além disso, esse pacote pode ser publicado para que as suas funções possam ser usadas e aprimoradas por outros usuários.
 
 Neste trabalho vamos mostrar como transformar suas funções em um pacote e publicá-lo.
 
@@ -116,7 +116,7 @@ Existem também outros arquivos que não são criados automáticamente e nem obr
 
 - Uma pasta chamada tests (diretório 'tests/') contendo scripts com testes, rodados durante a criação do pacote para encontrar algum resultado não esperado. 
 
-- Uma pasta chamada vignettes (diretório 'vignettes/') contendo uma ou mais vignettes que são um pequeno tutorial das funções do pacote.
+- Uma pasta chamada vignettes (diretório 'vignettes/') contendo uma ou mais vignettes que são pequenos tutoriais das funções do pacote.
 
 - Uma pasta chamada data (diretório '/data') contendo arquivos de dados que podem ser usados como exemplos na utilização das funções do pacote. É preferivel que estes arquivos estejam em formato binario e comprimido (ex: .rda).
 
@@ -184,7 +184,7 @@ unload()   # descarrega as funções
 ### Adicionando uma base de dados no pacote
 
 Adicionar bases de dados ao pacote, seja para usar como exemplo ou para disponibiliza-lás para os usuários, é bem simples e pode ser feito utilizando o devtools.
-Primeiro você deve ter sua base no r, salvo em um objeto e então salva-la como .rda, que pode ser feito da sequinte forma:
+Primeiro você deve ter sua base no r, salvo em um objeto e então salvá-la como .rda, que pode ser feito da sequinte forma:
 
 ```{r}
 #Exemplo
@@ -199,12 +199,12 @@ saveRDS(object = dados, file = 'qqr/data/dados.rda')
 
 É importante ressaltar que o nome do arquivo precisa ser o igual ao nome objeto.
 
-Depois de salvo, você deve armazenar essa base na pasta data e caso ela não exista você deve cria-lá.
+Depois de salvo, você deve armazenar essa base na pasta data e caso ela não exista você deve criá-la.
 
 
 ### Documentando as funções e as bases de dados
 
-A documentação é um dos aspectos mais importantes de um bom pacote. Sem ele, os usuários não saberão como usar seu pacote. A documentação também é útil para desenvolvedores que queiram estender seu pacote.
+A documentação é um dos aspectos mais importantes de um bom pacote. Sem ela, os usuários não saberão como usar seu pacote. A documentação também é útil para desenvolvedores que queiram estender seu pacote.
 
 O R fornece uma maneira padrão de documentar os objetos em um pacote: você grava arquivos .Rd no diretório '/man'. Esses arquivos usam uma sintaxe personalizada, vagamente baseada em LaTeX, e são renderizados em HTML. Ao invés de escrever esses arquivos manualmente, usaremos o roxygen2, que transforma comentários especialmente formatados em arquivos .Rd.
 
@@ -496,14 +496,23 @@ import(xml2)
 O arquivo namespace é gerado automaticamente atráves das documentações feitas. O namespace é formado por um conjunto de 8 funções, sendo 4 delas referentes a export e 4 referentes a import.
 
 **Export**
+
 1.*export()*: funções que serão exportadas.
+
 2.*exportPattern()*: exporta todas as funções que correspondem a um padrão.
+
 3.*exportClasses(), exportMethods()*: exporta classes e métodos S4.
+
 4.*S3method()*: métodos de exportação S3.
+
 **Import**
+
 1.*import()*: importa todas as funções de um pacote.
-2.*importFrom()*: importar funções selecionadas .
+
+2.*importFrom()*: importar funções selecionadas.
+
 3.*importClassesFrom(), importMethodsFrom()*: importa classes e métodos S4.
+
 4.*useDynLib()*: importar uma função de C.
 
 
@@ -633,7 +642,7 @@ O Git é uma ferramenta com muitos recursos e o que foi mostrado é apenas uma p
 
 #### No CRAN:
 
-O processo de mandar o pacote para o CRAN se torna bastante complicado pelo fato de ser muito criteriosa. A correção automática feita pelo CRAN retorna os errors (erros), warnings (avisos) e notes (notas). Notas são toleráveis, porém se for observado um erro ou aviso o pacote não será aceito. Após passar pela correção automática, o pacote será feita uma inspeção manual no pacote com objetivo de observar possíveis erros de escrita e não encaixe no padrão requerido pelo CRAN. Se o pacote não conter erros, ele será publicado, caso contrário você deve corrigir os erros apresentados e submeter o pacote para avaliação novamente. Segue abaixo um tutorial para a submissão.
+O processo de mandar o pacote para o CRAN se torna bastante complicado pelo fato de ser muito criterioso. A correção automática feita pelo CRAN retorna os errors (erros), warnings (avisos) e notes (notas). Notas são toleráveis, porém se for observado um erro ou aviso o pacote não será aceito. Após passar pela correção automática, será feita uma inspeção manual no pacote com objetivo de observar possíveis erros de escrita e não encaixe no padrão requerido pelo CRAN. Se o pacote não conter erros, ele será publicado, caso contrário você deve corrigir os erros apresentados e submeter o pacote para avaliação novamente. Segue abaixo um tutorial para a submissão.
 
 
 A função check do pacote realiza a correção automática localmente, tornando o processo mais fácil. Existem outras funções que checam o pacote em diferentes sistemas operacionais que acaba sendo útil para o desenvolvedor, todas essas funções podem ser vistas no help do pacote devtools.
