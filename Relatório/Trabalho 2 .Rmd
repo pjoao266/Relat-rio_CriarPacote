@@ -735,6 +735,18 @@ htmltools::img(src = knitr::image_uri("imagem9.png"),
 </div>
 <br> 
 
+Destaca-se que submetemos o pacote para o CRAN no dia 5/10/2020 e no mesmo dia recebemos um email informando que o pacote havia passado pelo teste automático. Segue abaixo o email recebido:
+
+<div align="center">
+```{r}
+htmltools::img(src = knitr::image_uri("imagem20..jpeg"),
+               style = 'width: 300px',
+               alt = 'Email')
+```
+</div>
+<br>
+
+Porém até a seguinte data não recebemos nenhuma resposta quanto a verificação manual.
 
 #### Funcionalidades do pacote qqr
 
